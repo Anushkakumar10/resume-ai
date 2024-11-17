@@ -14,7 +14,7 @@ def generate_token(user):
     Generates a JWT token for the authenticated user.
     The token will be valid for 30 days by default.
     """
-    access_token = create_access_token(identity=user.id, fresh=True, expires_delta=timedelta(days=7))
+    access_token = create_access_token(identity=str(user.id), fresh=True, expires_delta=timedelta(days=7))
     return access_token
 
 
@@ -28,7 +28,5 @@ def validate_user_credentials(username, password):
 
 def get_user_id_from_token():
     """Extract user from JWT token"""
-    print("hello")
     user_id = get_jwt_identity()
-    print(user_id)
     return user_id

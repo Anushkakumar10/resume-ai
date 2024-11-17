@@ -41,9 +41,8 @@ def get_template_by_id(template_id):
 
 
 @jwt_required()
-def create_template():
+def create_template(data):
     """Create a new template."""
-    data = request.json
     try:
         new_template = Template(
             name=data['name'],
@@ -60,9 +59,8 @@ def create_template():
 
 
 @jwt_required()
-def update_template(template_id):
+def update_template(template_id, data):
     """Update an existing template."""
-    data = request.json
     template = Template.query.get(template_id)
     if not template:
         return jsonify({"error": "Template not found"}), 404
