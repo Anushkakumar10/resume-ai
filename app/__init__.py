@@ -4,7 +4,7 @@
 from flask import Flask
 
 from .config import Config
-from .extensions import db, jwt
+from .extensions import db, jwt, migrate
 from .routes import init_routes
 
 
@@ -15,6 +15,8 @@ def create_app():
     # Initialize extensions
     db.init_app(app)
     jwt.init_app(app)
+    migrate.init_app(app, db)
+
 
     # Initialize routes
     init_routes(app)
